@@ -1,0 +1,2 @@
+iterations_per_burst: 50000
+burst_interval_seconds: 3

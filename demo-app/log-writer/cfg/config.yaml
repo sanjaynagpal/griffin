@@ -1,0 +1,2 @@
+interval_seconds: 1
+log_levels: [INFO, INFO, INFO, WARN, ERROR]
