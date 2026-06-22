@@ -33,10 +33,9 @@ try {
         $run++
         $grandTotal += $acc
 
-        $stdout.WriteLine(
-            "$(Get-Date -Format 'o') INFO  burst={0,-4} n={1,-6} sum={2,-13} elapsed={3:F0}ms  total={4}" -f
+        $line = "$(Get-Date -Format 'o') INFO  burst={0,-4} n={1,-6} sum={2,-13} elapsed={3:F0}ms  total={4}" -f `
             $run, $Burst, $acc, $sw.Elapsed.TotalMilliseconds, $grandTotal
-        )
+        $stdout.WriteLine($line)
 
         Start-Sleep -Seconds $Interval
     }

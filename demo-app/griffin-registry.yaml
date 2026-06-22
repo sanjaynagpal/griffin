@@ -1,0 +1,16 @@
+counter:
+  name: Counter
+  run.unix: bin/run.sh
+  run.windows: bin/run.ps1
+
+http-server:
+  name: HTTP Server
+  port: "8080"
+  run.unix: bin/run.sh
+  run.windows: bin/run.ps1
+
+log-writer:
+  name: Log Writer
+  run.unix: bin/run.sh
+  run.windows: bin/run.ps1
+

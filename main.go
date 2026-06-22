@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+
+	tea "github.com/charmbracelet/bubbletea"
 )
 
 // Config holds runtime configuration resolved from the environment.
@@ -63,8 +65,11 @@ func loadConfig() (Config, error) {
 
 // runTUI starts the interactive terminal UI.
 func runTUI(cfg Config) {
-	// Placeholder — replaced in Phase 7.
-	fmt.Println("TUI mode")
+	p := tea.NewProgram(initialModel(cfg), tea.WithAltScreen())
+	if _, err := p.Run(); err != nil {
+		fmt.Fprintln(os.Stderr, "griffin:", err)
+		os.Exit(1)
+	}
 }
 
 // runInit runs the griffin init command. When file is non-empty the service
