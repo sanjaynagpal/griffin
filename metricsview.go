@@ -9,9 +9,9 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-// metricHistoryCap is the number of samples retained per service (5 min at the
+// metricHistoryCap is the number of samples retained per service (30 min at the
 // 5-second sampling cadence).
-const metricHistoryCap = 60
+const metricHistoryCap = 360
 
 // metricSample is one timestamped metrics reading.
 type metricSample struct {
@@ -333,14 +333,17 @@ func renderMetricsPanel(appRoot string, statuses []ServiceStatus, metrics map[st
 // give the detailed trend. Each chart is drawn with a left/bottom axis so the
 // zero baseline is visible.
 func focusedGraphs(b *strings.Builder, sel ServiceStatus, h *MetricHistory, width int, gmode graphMode) {
-	wCells := 30 // 60 dot columns → the full 60-sample ring buffer
-	if width > 0 && wCells > width-6 {
-		wCells = width - 6
+	const (
+		statsW = 28 // width of the left label/stats column
+		hCells = 4  // chart rows, aligned with the 4 stats lines
+	)
+	wCells := 48 // fallback before the first WindowSizeMsg
+	if width > 0 {
+		wCells = width - statsW - 6 // 2 indent + 1 axis + margin
 	}
 	if wCells < 8 {
 		wCells = 8
 	}
-	const hCells = 3
 
 	var cpuSeries, memSeries, dirSeries []float64
 	if h != nil {
@@ -355,36 +358,41 @@ func focusedGraphs(b *strings.Builder, sel ServiceStatus, h *MetricHistory, widt
 	}
 	b.WriteString("\n")
 	b.WriteString(styleHeading.Render("  " + sel.Entry.DisplayName))
-	b.WriteString(styleDim.Render("   focused graphs (last 5m)"))
+	b.WriteString(styleDim.Render("   focused graphs (last 30m)"))
 	b.WriteString("\n")
 
 	pct := func(v float64) string { return fmt.Sprintf("%.1f%%", v) }
 	asBytes := func(v float64) string { return formatBytes(uint64(v)) }
 
-	writeGraph(b, "CPU %", cpuSeries, pct, wCells, hCells, styleRunning, gmode)
-	writeGraph(b, "Memory", memSeries, asBytes, wCells, hCells, stylePointer, gmode)
-	writeGraph(b, "Dir", dirSeries, asBytes, wCells, hCells, styleCaution, gmode)
+	writeGraph(b, "CPU %", cpuSeries, pct, wCells, hCells, statsW, styleRunning, gmode)
+	writeGraph(b, "Memory", memSeries, asBytes, wCells, hCells, statsW, stylePointer, gmode)
+	writeGraph(b, "Dir", dirSeries, asBytes, wCells, hCells, statsW, styleCaution, gmode)
 }
 
-// writeGraph emits one labelled braille chart with cur/min/avg/peak stats and a
-// left/bottom axis marking the zero baseline. The series is scaled so the
-// window peak reaches the top of the canvas; gmode chooses a line or filled area.
+// writeGraph emits one braille chart with a left stats column (label, peak, avg,
+// cur, min) and the chart drawn to its right with a left/bottom axis marking
+// the zero baseline. The series is scaled so the window peak reaches the top;
+// gmode chooses a line or filled area. The metric name is shown in the chart's
+// own colour so each section is clearly identified.
 func writeGraph(b *strings.Builder, label string, series []float64,
-	fmtVal func(float64) string, wCells, hCells int, style lipgloss.Style, gmode graphMode) {
+	fmtVal func(float64) string, wCells, hCells, statsW int, style lipgloss.Style, gmode graphMode) {
 
 	cur, lo, avg, peak := seriesStats(series)
-	stats := "no samples"
+	left := make([]string, hCells)
+	left[0] = label
 	if len(series) > 0 {
-		stats = fmt.Sprintf("cur %s   min %s   avg %s   peak %s",
-			fmtVal(cur), fmtVal(lo), fmtVal(avg), fmtVal(peak))
+		if hCells > 1 {
+			left[1] = "peak " + fmtVal(peak)
+		}
+		if hCells > 2 {
+			left[2] = "avg  " + fmtVal(avg) + " cur " + fmtVal(cur)
+		}
+		if hCells > 3 {
+			left[3] = "min  " + fmtVal(lo)
+		}
+	} else if hCells > 1 {
+		left[1] = "no samples"
 	}
-	// The metric name is highlighted in the chart's own colour so the label,
-	// axis and line all read as one colour-coded section.
-	b.WriteString("  ")
-	b.WriteString(style.Bold(true).Render(fmt.Sprintf("▌ %-7s", label)))
-	b.WriteString("  ")
-	b.WriteString(styleDim.Render(stats))
-	b.WriteString("\n")
 
 	canvas := newBrailleCanvas(wCells, hCells)
 	if gmode == graphArea {
@@ -392,15 +400,25 @@ func writeGraph(b *strings.Builder, label string, series []float64,
 	} else {
 		canvas.plotLine(series, peak)
 	}
-	// Each row carries a left axis "│"; the final row is the zero baseline "└──",
-	// both in the chart colour to bracket the section.
-	for _, row := range canvas.rows() {
+	rows := canvas.rows()
+
+	// Each chart row: stats cell + left axis "│" + braille; first row's label is
+	// bold in the chart colour, the rest dim. Axis and braille share the colour.
+	for i := 0; i < hCells; i++ {
 		b.WriteString("  ")
+		cell := rightPad(left[i], statsW)
+		if i == 0 {
+			b.WriteString(style.Bold(true).Render(cell))
+		} else {
+			b.WriteString(styleDim.Render(cell))
+		}
 		b.WriteString(style.Render("│"))
-		b.WriteString(style.Render(row))
+		b.WriteString(style.Render(rows[i]))
 		b.WriteString("\n")
 	}
+	// Zero baseline beneath the chart, aligned past the stats column.
 	b.WriteString("  ")
+	b.WriteString(rightPad("", statsW))
 	b.WriteString(style.Render("└" + strings.Repeat("─", wCells)))
 	b.WriteString("\n")
 }

@@ -50,8 +50,17 @@ func (c *brailleCanvas) set(x, y int) {
 // reaches the top of the canvas. Columns with no data (buffer not yet full)
 // are left blank on the left.
 func (c *brailleCanvas) plotLine(values []float64, max float64) {
-	n := len(values)
-	if n == 0 || max <= 0 {
+	// Resample to at most half the dot-columns so consecutive points are spaced
+	// horizontally; the connecting segments can then slope diagonally instead of
+	// collapsing into vertical bars, which is what made the trace look dotted.
+	c.polyline(resample(values, c.dotW()/2), max)
+}
+
+// polyline plots pts (oldest→newest) spread evenly across the full width and
+// connects consecutive points with straight one-pixel line segments.
+func (c *brailleCanvas) polyline(pts []float64, max float64) {
+	m := len(pts)
+	if m == 0 || max <= 0 {
 		return
 	}
 	dw, dh := c.dotW(), c.dotH()
@@ -65,37 +74,72 @@ func (c *brailleCanvas) plotLine(values []float64, max float64) {
 		}
 		return int(math.Round((1 - r) * float64(dh-1)))
 	}
-	prevY, hasPrev := 0, false
-	for col := 0; col < dw; col++ {
-		idx := n - dw + col // newest value at the rightmost column
-		if idx < 0 {
-			hasPrev = false
-			continue
+	xFor := func(i int) int {
+		if m == 1 {
+			return dw - 1
 		}
-		y := yFor(values[idx])
-		if hasPrev {
-			// Connect to the previous point with a thin line: split the vertical
-			// step across the two columns at the midpoint, so a steep change
-			// renders as a diagonal rather than a solid full-height vertical bar
-			// (which read as a "fill", especially on a plateau at the peak).
-			mid := (prevY + y) / 2
-			c.vspan(col-1, prevY, mid)
-			c.vspan(col, mid, y)
-		} else {
-			c.set(col, y)
-		}
-		prevY, hasPrev = y, true
+		return i * (dw - 1) / (m - 1)
+	}
+	if m == 1 {
+		c.set(dw-1, yFor(pts[0]))
+		return
+	}
+	for i := 1; i < m; i++ {
+		c.line(xFor(i-1), yFor(pts[i-1]), xFor(i), yFor(pts[i]))
 	}
 }
 
-// vspan sets every dot in column x between rows a and b (inclusive).
-func (c *brailleCanvas) vspan(x, a, b int) {
-	if a > b {
-		a, b = b, a
+// line draws a one-pixel Bresenham line between two dot coordinates.
+func (c *brailleCanvas) line(x0, y0, x1, y1 int) {
+	dx := absInt(x1 - x0)
+	dy := -absInt(y1 - y0)
+	sx, sy := 1, 1
+	if x0 > x1 {
+		sx = -1
 	}
-	for y := a; y <= b; y++ {
-		c.set(x, y)
+	if y0 > y1 {
+		sy = -1
 	}
+	err := dx + dy
+	for {
+		c.set(x0, y0)
+		if x0 == x1 && y0 == y1 {
+			return
+		}
+		e2 := 2 * err
+		if e2 >= dy {
+			err += dy
+			x0 += sx
+		}
+		if e2 <= dx {
+			err += dx
+			y0 += sy
+		}
+	}
+}
+
+// resample returns at most k values drawn evenly from vs (order preserved, both
+// the oldest and newest kept). Returns vs unchanged when it already fits.
+func resample(vs []float64, k int) []float64 {
+	n := len(vs)
+	if n == 0 || k <= 0 {
+		return nil
+	}
+	if n <= k {
+		return vs
+	}
+	out := make([]float64, k)
+	for i := 0; i < k; i++ {
+		out[i] = vs[i*(n-1)/(k-1)]
+	}
+	return out
+}
+
+func absInt(n int) int {
+	if n < 0 {
+		return -n
+	}
+	return n
 }
 
 // plotArea draws the same line as plotLine but fills every dot from the value
