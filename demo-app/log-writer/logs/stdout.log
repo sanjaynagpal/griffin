@@ -17939,3 +17939,599 @@
 2026-06-22T00:03:43.6230520-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
 2026-06-22T00:03:44.6236625-04:00 INFO  request processed       path=/api/metrics       latency=1ms
 2026-06-22T00:03:45.6385376-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:03:46.6391981-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:03:47.6392106-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:03:48.6537337-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:03:49.6731467-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:03:50.6888705-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:03:51.6899125-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:03:52.6971006-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:03:53.7058508-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:03:54.7216131-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:03:55.7229433-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:03:56.7386665-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:03:57.7388931-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:03:58.7535715-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:03:59.7552227-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:04:00.7554757-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:04:01.7682138-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:04:02.7699443-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:04:03.7733802-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:04:04.7900924-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:04:05.8061988-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:04:06.8213819-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:04:07.8365134-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:04:08.8371841-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:04:09.8391748-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:04:10.8398103-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:04:11.8538304-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:04:12.8540595-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:04:13.8554931-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:04:14.8697379-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:04:15.8715640-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:04:16.8723062-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:04:17.8734242-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:04:18.8895509-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:04:19.8899885-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:04:20.8903618-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:04:21.8904990-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:04:22.8907997-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:04:23.9050907-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:04:24.9065256-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:04:25.9202555-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:04:26.9220537-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:04:27.9398758-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:04:28.9546870-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:04:29.9548976-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:04:30.9559072-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:04:31.9566404-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:04:32.9710333-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:04:33.9716252-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:04:34.9875265-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:04:35.9900303-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:04:36.9910249-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:04:38.0057468-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:04:39.0062486-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:04:40.0063850-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:04:41.0078341-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:04:42.0092200-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:04:43.0107786-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:04:44.0220220-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:04:45.0221271-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:04:46.0251084-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:04:47.0386474-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:04:48.0399091-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:04:49.0536788-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:04:50.0696173-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:04:51.0719837-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:04:52.0899314-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:04:53.1056335-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:04:54.1207910-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:04:55.1221495-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:04:56.1229992-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:04:57.1239619-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:04:58.1370391-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:04:59.1412157-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:05:00.1534847-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:05:01.1652173-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:05:02.1697532-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:05:03.1728178-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:05:04.1818748-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:05:05.1905338-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:05:06.2062541-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:05:07.2232647-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:05:08.2397120-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:05:09.2546384-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:05:10.2561871-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:05:11.2692143-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:05:12.2718462-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:05:13.2729776-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:05:14.2896138-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:05:15.2908807-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:05:16.3059126-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:05:17.3065114-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:05:18.3097048-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:05:19.3173660-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:05:20.3225839-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:05:21.3377871-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:05:22.3387589-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:05:23.3399427-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:05:24.3548271-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:05:25.3694904-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:05:26.3707204-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:05:27.3892903-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:05:28.3895191-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:05:29.3903037-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:05:30.3970695-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:05:31.4054331-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:05:32.4054552-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:05:33.4055109-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:05:34.4065252-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:05:35.4073867-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:05:36.4220788-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:05:37.4233578-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:05:38.4386007-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:05:39.4397242-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:05:40.4552421-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:05:41.4695304-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:05:42.4719601-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:05:43.4725850-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:05:44.4731203-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:05:45.4889384-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:05:46.4900127-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:05:47.4999549-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:05:48.5057876-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:05:49.5067301-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:05:50.5209552-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:05:51.5223864-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:05:52.5249896-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:05:53.5396417-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:05:54.5412718-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:05:55.5479157-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:05:56.5543864-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:05:57.5550563-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:05:58.5564815-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:05:59.5732167-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:06:00.5899055-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:06:01.6059071-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:06:02.6077191-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:06:03.6081583-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:06:04.6083032-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:06:05.6218678-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:06:06.6258504-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:06:07.6386756-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:06:08.6393378-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:06:09.6549469-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:06:10.6699314-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:06:11.6723731-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:06:12.6732024-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:06:13.6745663-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:06:14.6884282-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:06:15.7064911-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:06:16.7207616-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:06:17.7393740-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:06:18.7542904-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:06:19.7545496-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:06:20.7700391-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:06:21.7733697-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:06:22.7746329-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:06:23.7743864-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:06:24.7891107-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:06:25.7897393-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:06:26.8058066-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:06:27.8064266-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:06:28.8210150-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:06:29.8226655-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:06:30.8332259-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:06:31.8376352-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:06:32.8520562-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:06:33.8536580-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:06:34.8676266-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:06:35.8731710-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:06:36.8786737-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:06:37.8857107-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:06:38.8889066-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:06:39.8894834-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:06:40.8900865-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:06:41.9054589-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:06:42.9209929-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:06:43.9233021-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:06:44.9381242-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:06:45.9399986-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:06:46.9532903-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:06:47.9541129-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:06:48.9555103-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:06:49.9562155-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:06:50.9733822-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:06:51.9850138-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:06:52.9893974-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:06:53.9899441-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:06:55.0051019-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:06:56.0074546-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:06:57.0082071-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:06:58.0235667-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:06:59.0364724-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:07:00.0385692-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:07:01.0410592-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:07:02.0546030-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:07:03.0732754-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:07:04.0864116-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:07:05.0896242-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:07:06.0903677-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:07:07.0904305-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:07:08.0919273-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:07:09.1060231-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:07:10.1069916-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:07:11.1215954-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:07:12.1233369-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:07:13.1396397-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:07:14.1526738-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:07:15.1546830-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:07:16.1699088-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:07:17.1724631-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:07:18.1811305-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:07:19.1896485-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:07:20.2059577-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:07:21.2225962-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:07:22.2379041-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:07:23.2402406-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:07:24.2517847-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:07:25.2545322-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:07:26.2551911-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:07:27.2562417-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:07:28.2716329-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:07:29.2892040-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:07:30.2897328-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:07:31.2902887-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:07:32.3063313-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:07:33.3069336-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:07:34.3227829-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:07:35.3401459-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:07:36.3517296-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:07:37.3580399-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:07:38.3718878-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:07:39.3871467-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:07:40.3900326-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:07:41.3903877-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:07:42.4051325-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:07:43.4066203-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:07:44.4071210-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:07:45.4215889-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:07:46.4229815-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:07:47.4234004-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:07:48.4378668-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:07:49.4392486-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:07:50.4428310-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:07:51.4540591-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:07:52.4577139-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:07:53.4712142-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:07:54.4723043-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:07:55.4731881-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:07:56.4819206-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:07:57.4846898-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:07:58.4881823-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:07:59.4935100-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:08:00.5065330-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:08:01.5207658-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:08:02.5228163-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:08:03.5251855-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:08:04.5297612-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:08:05.5344257-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:08:06.5389606-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:08:07.5414216-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:08:08.5431145-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:08:09.5497193-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:08:10.5517230-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:08:11.5578953-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:08:12.5662656-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:08:13.5723310-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:08:14.5729054-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:08:15.5777735-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:08:16.5807536-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:08:17.5871841-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:08:18.5888139-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:08:19.5927089-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:08:20.5967540-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:08:21.6040381-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:08:22.6085440-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:08:23.6144752-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:08:24.6206544-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:08:25.6238500-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:08:26.6381963-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:08:27.6415304-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:08:28.6467723-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:08:29.6513764-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:08:30.6586986-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:08:31.6630881-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:08:32.6704138-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:08:33.6797878-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:08:34.6822659-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:08:35.6866173-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:08:36.6947706-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:08:37.7002677-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:08:38.7085720-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:08:39.7169324-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:08:40.7263082-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:08:41.7349241-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:08:42.7404188-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:08:43.7460872-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:08:44.7470312-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:08:45.7508120-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:08:46.7577046-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:08:47.7631714-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:08:48.7687677-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:08:49.7755274-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:08:50.7788463-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:08:51.7821170-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:08:52.7899962-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:08:53.7922259-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:08:54.7944650-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:08:55.8060450-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:08:56.8064632-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:08:57.8068079-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:08:58.8172364-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:08:59.8215475-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:09:00.8260296-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:09:01.8307111-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:09:02.8375417-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:09:03.8421041-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:09:04.8464517-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:09:05.8510917-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:09:06.8532898-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:09:07.8606117-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:09:08.8654102-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:09:09.8689275-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:09:10.8768068-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:09:11.8844058-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:09:12.8902118-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:09:13.8981453-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:09:14.9009338-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:09:15.9057100-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:09:16.9062215-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:09:17.9086721-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:09:18.9171606-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:09:19.9237846-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:09:20.9314925-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:09:21.9407431-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:09:22.9412363-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:09:23.9463116-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:09:24.9474412-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:09:25.9582656-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:09:26.9583137-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:09:27.9718877-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:09:28.9754443-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:09:29.9892762-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:09:30.9898047-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:09:31.9992637-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:09:33.0026325-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:09:34.0033565-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:09:35.0069728-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:09:36.0165095-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:09:37.0221158-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:09:38.0228724-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:09:39.0340233-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:09:40.0383775-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:09:41.0397000-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:09:42.0546050-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:09:43.0680296-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:09:44.0695628-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:09:45.0736956-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:09:46.0854602-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:09:47.0857023-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:09:48.0996724-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:09:49.1087309-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:09:50.1159821-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:09:51.1183751-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:09:52.1228694-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:09:53.1252514-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:09:54.1369235-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:09:55.1510653-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:09:56.1562850-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:09:57.1562380-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:09:58.1696018-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:09:59.1857535-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:10:00.1873789-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:10:01.1892041-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:10:02.1897374-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:10:03.1900203-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:10:04.2049565-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:10:05.2066309-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:10:06.2066862-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:10:07.2221972-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:10:08.2228868-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:10:09.2352051-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:10:10.2389152-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:10:11.2398249-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:10:12.2539856-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:10:13.2562108-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:10:14.2649544-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:10:15.2671161-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:10:16.2700468-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:10:17.2728685-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:10:18.2728811-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:10:19.2735753-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:10:20.2898361-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:10:21.2936663-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:10:22.3074436-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:10:23.3173844-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:10:24.3225937-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:10:25.3240102-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:10:26.3256689-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:10:27.3408309-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:10:28.3553394-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:10:29.3562665-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:10:30.3695442-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:10:31.3730624-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:10:32.3741758-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:10:33.3778009-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:10:34.3869208-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:10:35.3878660-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:10:36.3885664-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:10:37.3893429-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:10:38.4034680-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:10:39.4071632-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:10:40.4185985-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:10:41.4215619-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:10:42.4365639-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:10:43.4376758-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:10:44.4389026-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:10:45.4522962-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:10:46.4531459-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:10:47.4544670-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:10:48.4570179-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:10:49.4602879-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:10:50.4672826-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:10:51.4691697-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:10:52.4705356-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:10:53.4720858-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:10:54.4732016-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:10:55.4799213-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:10:56.4903352-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:10:57.5057496-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:10:58.5062503-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:10:59.5065742-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:11:00.5071657-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:11:01.5197488-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:11:02.5232312-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:11:03.5234162-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:11:04.5236972-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:11:05.5239192-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:11:06.5253844-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:11:07.5383915-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:11:08.5524669-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:11:09.5680497-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:11:10.5822106-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:11:11.5864095-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:11:12.6007061-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:11:13.6024765-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:11:14.6048093-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:11:15.6054700-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:11:16.6059902-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:11:17.6107084-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:11:18.6193681-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:11:19.6327407-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:11:20.6377457-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:11:21.6397028-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:11:22.6561573-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:11:23.6563585-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:11:24.6714190-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:11:25.6717310-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:11:26.6844321-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:11:27.6887020-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:11:28.6896654-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:11:29.7047969-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:11:30.7057137-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:11:31.7216341-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:11:32.7249724-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:11:33.7269724-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:11:34.7375322-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:11:35.7516741-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:11:36.7587810-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:11:37.7657006-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:11:38.7725936-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:11:39.7731456-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:11:40.7798717-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:11:41.7846249-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:11:42.7915878-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:11:43.7981045-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:11:44.8031199-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:11:45.8088164-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:11:46.8204628-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:11:47.8315658-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:11:48.8380498-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:11:49.8388720-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:11:50.8396177-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:11:51.8550010-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:11:52.8559799-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:11:53.8564446-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:11:54.8664004-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:11:55.8673247-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:11:56.8703239-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:11:57.8827962-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:11:58.8972583-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:11:59.9020318-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:12:00.9093798-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:12:01.9112343-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:12:02.9165582-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:12:03.9321736-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:12:04.9364865-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:12:05.9408409-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:12:06.9551588-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:12:07.9689064-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:12:08.9711276-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:12:09.9718581-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:12:10.9751363-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:12:11.9775072-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:12:12.9786477-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:12:13.9824032-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:12:14.9849706-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:12:15.9878284-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:12:16.9888871-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:12:17.9997967-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:12:19.0085352-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:12:20.0121963-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:12:21.0210796-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:12:22.0229152-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:12:23.0232696-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:12:24.0391442-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:12:25.0398991-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:12:26.0504189-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:12:27.0550796-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:12:28.0665062-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:12:29.0804437-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:12:30.0816962-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:12:31.0846989-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:12:32.0866606-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:12:33.0901225-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:12:34.0899150-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:12:35.0923635-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:12:36.0929428-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:12:37.1053237-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:12:38.1202941-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:12:39.1225559-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:12:40.1371170-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:12:41.1410280-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:12:42.1472015-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:12:43.1504983-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:12:44.1546392-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:12:45.1601581-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:12:46.1652910-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:12:47.1701037-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:12:48.1770138-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:12:49.1821251-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:12:50.1875235-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:12:51.1893526-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:12:52.1896990-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:12:53.2003898-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:12:54.2054487-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:12:55.2063511-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:12:56.2220602-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:12:57.2223901-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:12:58.2346674-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:12:59.2373406-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:13:00.2384190-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:13:01.2526936-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:13:02.2606400-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:13:03.2671958-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:13:04.2693963-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:13:05.2772226-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:13:06.2835120-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:13:07.2867773-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:13:08.2924639-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:13:09.2936843-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:13:10.3068639-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:13:11.3067889-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:13:12.3220566-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:13:13.3243552-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:13:14.3375491-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:13:15.3396794-04:00 ERROR background task done    job=cleanup             duration=120ms
+2026-06-22T00:13:16.3403984-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:13:17.3416953-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:13:18.3562792-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:13:19.3566055-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:13:20.3599111-04:00 WARN  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:13:21.3633789-04:00 ERROR retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:13:22.3675763-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:13:23.3680562-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:13:24.3727851-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:13:25.3791654-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:13:26.3888270-04:00 WARN  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:13:27.3899343-04:00 ERROR connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:13:28.4035125-04:00 INFO  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:13:29.4062838-04:00 INFO  index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:13:30.4154860-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:13:31.4223555-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:13:32.4295069-04:00 WARN  request processed       path=/api/health        latency=2ms
+2026-06-22T00:13:33.4389280-04:00 ERROR cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:13:34.4542594-04:00 INFO  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:13:35.4570522-04:00 INFO  background task done    job=cleanup             duration=120ms
+2026-06-22T00:13:36.4636236-04:00 INFO  latency spike detected  endpoint=/api/data      latency=248ms
+2026-06-22T00:13:37.4716613-04:00 INFO  connection timeout      host=db.internal:5432   attempt=3
+2026-06-22T00:13:38.4771217-04:00 WARN  request processed       path=/api/metrics       latency=1ms
+2026-06-22T00:13:39.4858158-04:00 ERROR index rebuilt           docs=14821              elapsed=4.2s
+2026-06-22T00:13:40.4929947-04:00 INFO  rate limit approached   client=10.0.1.4         usage=87%
+2026-06-22T00:13:41.5010173-04:00 INFO  retry succeeded         host=cache.internal     attempt=2
+2026-06-22T00:13:42.5076297-04:00 INFO  request processed       path=/api/health        latency=2ms
+2026-06-22T00:13:43.5144467-04:00 INFO  cache hit               key=user:session:4821   ratio=0.94
+2026-06-22T00:13:44.5185051-04:00 WARN  queue flushed           items=17                elapsed=3ms
+2026-06-22T00:13:45.5215962-04:00 ERROR background task done    job=cleanup             duration=120ms
