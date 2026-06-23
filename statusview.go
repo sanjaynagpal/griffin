@@ -48,11 +48,11 @@ func (v StatusView) View(width int, sel selectionStyle) string {
 	b.WriteString("\n\n")
 
 	// Column headers.
-	// Widths: PID 7 · Port 5 · CPU% 7 · RSS 9 · Uptime 9 · Dir 9
+	// Widths: PID 7 · Port 5 · CPU% 7 · Memory 9 · Uptime 9 · Dir 9
 	// All metric columns are right-aligned (positive width in Sprintf). A
 	// one-column pointer gutter brackets the row on each side.
 	header := fmt.Sprintf("    %-*s  %-10s  %7s  %5s  %7s  %9s  %9s  %9s",
-		nameW, "Service", "Status", "PID", "Port", "CPU%", "RSS", "Uptime", "Dir")
+		nameW, "Service", "Status", "PID", "Port", "CPU%", "Memory", "Uptime", "Dir")
 	b.WriteString(styleDim.Render(header))
 	b.WriteByte('\n')
 

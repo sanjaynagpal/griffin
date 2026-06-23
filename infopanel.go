@@ -122,10 +122,10 @@ func renderInfoPanel(d infoPanelData, width int) string {
 	if m.Available {
 		section(&b, "MEMORY")
 		if m.RSS > 0 {
-			b.WriteString(infoRow("RSS", formatBytes(m.RSS)))
+			b.WriteString(infoRow("Memory", formatBytes(m.RSS)))
 		}
 		if m.PeakRSS > 0 {
-			b.WriteString(infoRow("Peak RSS", formatBytes(m.PeakRSS)))
+			b.WriteString(infoRow("Peak Memory", formatBytes(m.PeakRSS)))
 		}
 		if m.VirtualMem > 0 {
 			b.WriteString(infoRow("Virtual", formatBytes(m.VirtualMem)))
