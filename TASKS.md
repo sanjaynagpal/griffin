@@ -246,4 +246,4 @@ Status markers: `[ ]` not started · `[~]` in progress · `[x]` complete
 
 ---
 
-*Last updated: 2026-06-21 — All phases (1–10) complete. Post-v1.0 enhancements: bulk start/stop (`a`/`A`), pointer/sidebar selection gutters (`g`), Dir column, gotop-style braille focused graphs in the Metrics Panel (`B`), and cycleable colour schemes (`t`: default/nord/solarized/mono). Pending a local `go build ./...` / `gofmt` pass.*
+*Last updated: 2026-06-22 — All phases (1–10) complete. Post-v1.0 enhancements: bulk start/stop (`a`/`A`), pointer/sidebar selection gutters (`g`), gotop-style braille focused graphs with cur/min/avg/peak + axis (`B`: line/area/off), cycleable colour schemes (`t`), 30-min metric history, and a master/detail layout — persistent left service list + center panel (metrics graphs default, `i` info, `l` logs) + full-width bottom legend. `renderMetricsPanel` / `StatusView.View` are now unused (left in place; safe to delete). Pending a local `go build ./...` / `gofmt` pass.*

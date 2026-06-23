@@ -60,9 +60,8 @@ func readLogChunk(path string, offset int64) (lines []string, newOffset int64, e
 	return strings.Split(text, "\n"), newOffset, true
 }
 
-// View renders the log viewer, clipped to the terminal height. Output is
-// header + separator + content + separator + legend; the caller's fitToFrame
-// pads any slack so the block stays a fixed size for Bubble Tea's diff renderer.
+// View renders the log viewer body (header + separator + content) sized to the
+// given center area. The keybinding legend lives in the global bottom bar.
 func (lv logView) View(width, height int) string {
 	var b strings.Builder
 
@@ -87,8 +86,8 @@ func (lv logView) View(width, height int) string {
 	b.WriteString(styleDim.Render(strings.Repeat("─", max(width-2, 20))))
 	b.WriteString("\n")
 
-	// Rows available for log content (reserve header, two separators, legend).
-	rows := height - 4
+	// Rows available for log content (reserve the header and separator).
+	rows := height - 2
 	if height <= 0 {
 		rows = 20
 	}
@@ -130,12 +129,6 @@ func (lv logView) View(width, height int) string {
 			b.WriteString("\n")
 		}
 	}
-
-	// --- Legend --------------------------------------------------------------
-	b.WriteString(styleDim.Render(strings.Repeat("─", max(width-2, 20))))
-	b.WriteString("\n")
-	b.WriteString(styleDim.Render("  ↑/↓  scroll    f  follow    tab  switch stream    b/Esc  back"))
-	b.WriteString("\n")
 
 	return b.String()
 }

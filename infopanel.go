@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"path/filepath"
 	"sort"
 	"strings"
 	"sync"
@@ -68,14 +69,18 @@ func loadInfoPanel(s ServiceStatus) infoPanelData {
 	return d
 }
 
-// renderInfoPanel draws the full-detail view for one service.
-func renderInfoPanel(d infoPanelData, width int) string {
+// renderInfoPanel draws the full-detail view for one service. appRoot is shown
+// at the top for context and used to relativise the component-root path. When
+// stale is true the data is cached from a previous collection still refreshing.
+func renderInfoPanel(d infoPanelData, appRoot string, width int, stale bool) string {
 	s := d.status
 	m := d.m
 
 	var b strings.Builder
 
 	// --- Header --------------------------------------------------------------
+	b.WriteString(styleDim.Render("  App root  " + appRoot))
+	b.WriteString("\n")
 	stateStyle := styleStopped
 	if s.State == "RUNNING" {
 		stateStyle = styleRunning
@@ -84,10 +89,14 @@ func renderInfoPanel(d infoPanelData, width int) string {
 	if s.PID > 0 {
 		pid = fmt.Sprintf("  ·  PID %d", s.PID)
 	}
+	b.WriteString("  ")
 	b.WriteString(styleBold.Render(s.Entry.DisplayName))
 	b.WriteString("  ")
 	b.WriteString(stateStyle.Render(s.State))
 	b.WriteString(styleDim.Render(pid))
+	if stale {
+		b.WriteString(styleDim.Render("  ·  refreshing…"))
+	}
 	b.WriteString("\n")
 	b.WriteString(styleDim.Render(strings.Repeat("─", max(width-4, 40))))
 	b.WriteString("\n")
@@ -231,7 +240,7 @@ func renderInfoPanel(d infoPanelData, width int) string {
 	// --- Component root disk usage -------------------------------------------
 	section(&b, "DISK")
 	if s.Entry.ComponentRoot != "" {
-		b.WriteString(infoRow("Component root", s.Entry.ComponentRoot))
+		b.WriteString(infoRow("Component root", relPath(appRoot, s.Entry.ComponentRoot)))
 	}
 	for _, sl := range d.disk {
 		val := formatBytes(sl.Bytes)
@@ -257,11 +266,6 @@ func renderInfoPanel(d infoPanelData, width int) string {
 		b.WriteString(infoRow("", styleDim.Render("(no output)")))
 	}
 
-	// --- Footer --------------------------------------------------------------
-	b.WriteString("\n")
-	b.WriteString(styleDim.Render("Press any key to return"))
-	b.WriteString("\n")
-
 	return b.String()
 }
 
@@ -272,9 +276,19 @@ func section(b *strings.Builder, title string) {
 	b.WriteString("\n")
 }
 
-// infoRow renders a labelled value row with a fixed-width label column.
+// relPath returns target relative to base (e.g. the service folder name); it
+// falls back to the absolute path if a relative form can't be computed.
+func relPath(base, target string) string {
+	if r, err := filepath.Rel(base, target); err == nil {
+		return r
+	}
+	return target
+}
+
+// infoRow renders a labelled value row. The label is dimmed and the value kept
+// at full brightness so the two read as distinct columns.
 func infoRow(label, value string) string {
-	return fmt.Sprintf("  %-16s  %s\n", label, value)
+	return fmt.Sprintf("  %s  %s\n", styleDim.Render(fmt.Sprintf("%-16s", label)), value)
 }
 
 // indentBlock indents every line of s by four spaces.

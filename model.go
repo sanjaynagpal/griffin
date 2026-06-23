@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"sync"
 	"time"
 
@@ -186,13 +187,12 @@ type model struct {
 	height      int
 	busy        bool
 	statusBar   string
-	infoData    *infoPanelData // detail for the open Info Panel; nil while loading
-	infoLoading bool
-	log         logView // state for the open Log View
-	logGen      int     // increments each time the Log View opens
+	infoCache   map[string]infoPanelData // last-known Info Panel detail per service
+	infoLoading bool                     // a fresh Info collection is in flight
+	log         logView                  // state for the open Log View
+	logGen      int                      // increments each time the Log View opens
 
 	metricHistory map[string]*MetricHistory // per-service sample ring buffers
-	metricsCursor int                       // selected row in the Metrics Panel
 	lastTick      time.Time                 // when the last 5 s refresh tick fired
 	sel           selectionStyle            // how the selected row is marked in tables
 	graphMode     graphMode                 // focused-graph style in the Metrics Panel (line/area/off)
@@ -208,7 +208,8 @@ func initialModel(cfg Config) model {
 		entries:       entries,
 		metrics:       make(map[string]ProcessMetrics),
 		metricHistory: make(map[string]*MetricHistory),
-		mode:          modeStatus,
+		infoCache:     make(map[string]infoPanelData),
+		mode:          modeMetrics, // center defaults to the metrics graphs
 		err:           err,
 		lastTick:      time.Now(),
 		graphMode:     graphLine,
@@ -263,10 +264,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 
 	case infoLoadedMsg:
-		// Ignore if the user already closed the panel before collection finished.
+		// Cache the fresh detail by service name so it can be shown immediately
+		// next time, even if the user has navigated elsewhere meanwhile.
+		m.infoCache[msg.data.status.Entry.Name] = msg.data
 		if m.mode == modeInfo {
-			d := msg.data
-			m.infoData = &d
 			m.infoLoading = false
 		}
 
@@ -330,65 +331,29 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	// --- Keyboard ------------------------------------------------------------
 
 	case tea.KeyMsg:
-		// ctrl+c quits from any mode.
-		if msg.String() == "ctrl+c" {
+		key := msg.String()
+
+		// Quit from anywhere.
+		if key == "ctrl+c" || key == "q" {
 			return m, tea.Quit
 		}
 
-		// Esc always returns to the status view.
-		if msg.String() == "esc" {
-			m.mode = modeStatus
-			m.infoData = nil
-			m.infoLoading = false
-			return m, nil
-		}
-
-		// 'g' toggles the selection gutter style (pointer > < vs solid sidebar)
-		// across the table views.
-		if msg.String() == "g" && (m.mode == modeStatus || m.mode == modeMetrics) {
-			if m.sel == selPointer {
-				m.sel = selSidebar
-			} else {
-				m.sel = selPointer
-			}
-			return m, nil
-		}
-
-		// 't' cycles the colour scheme from the table views.
-		if msg.String() == "t" && (m.mode == modeStatus || m.mode == modeMetrics) {
-			m.themeIdx++
-			applyTheme(m.themeIdx)
-			m.statusBar = "Theme: " + themeName(m.themeIdx)
-			return m, nil
-		}
-
-		switch m.mode {
-		case modeInfo:
-			// Any key dismisses the Info Panel and returns to the table.
-			m.mode = modeStatus
-			m.infoData = nil
-			m.infoLoading = false
-			return m, nil
-
-		case modeLog:
-			switch msg.String() {
-			case "b":
-				m.mode = modeStatus
+		// Log-view scroll keys (the center panel owns vertical scrolling; the
+		// list is navigated with the arrow keys, below).
+		if m.mode == modeLog {
+			switch key {
+			case "pgup":
+				m.log.follow = false
+				m.log.offset = maxInt(0, m.log.offset-10)
 				return m, nil
-			case "up", "k":
+			case "pgdown":
 				m.log.follow = false
-				if m.log.offset > 0 {
-					m.log.offset--
-				}
-			case "down", "j":
-				m.log.follow = false
-				if m.log.offset < len(m.log.lines)-1 {
-					m.log.offset++
-				}
+				m.log.offset = minInt(maxInt(0, len(m.log.lines)-1), m.log.offset+10)
+				return m, nil
 			case "f":
 				m.log.follow = true
+				return m, nil
 			case "tab":
-				// Switch stream and reload from the top.
 				if m.log.stream == "stdout" {
 					m.log.stream = "stderr"
 				} else {
@@ -401,139 +366,143 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.log.exists = true
 				return m, doReadLog(m.log.entry, m.log.stream, 0, true)
 			}
+		}
 
-		case modeMetrics:
-			switch msg.String() {
-			case "tab", "b":
-				m.mode = modeStatus
-				return m, nil
-			case "B":
-				m.graphMode = (m.graphMode + 1) % 3
-				m.statusBar = "Graph: " + m.graphMode.String()
-			case "q":
-				return m, tea.Quit
-			case "up", "k":
-				if m.metricsCursor > 0 {
-					m.metricsCursor--
-				}
-			case "down", "j":
-				if m.metricsCursor < len(m.statuses)-1 {
-					m.metricsCursor++
-				}
-			case "s":
-				if !m.busy && len(m.statuses) > 0 {
-					sel := m.statuses[m.metricsCursor]
-					if sel.State == "STOPPED" {
-						m.busy = true
-						m.statusBar = fmt.Sprintf("Starting %s…", sel.Entry.DisplayName)
-						return m, doStart(sel.Entry)
-					}
-				}
-			case "K":
-				if !m.busy && len(m.statuses) > 0 {
-					sel := m.statuses[m.metricsCursor]
-					if sel.State == "RUNNING" {
-						m.busy = true
-						m.statusBar = fmt.Sprintf("Stopping %s…", sel.Entry.DisplayName)
-						return m, doStop(sel.Entry)
-					}
-				}
+		switch key {
+		// --- List navigation (always active) ---------------------------------
+		case "up", "k":
+			if m.view.cursor > 0 {
+				m.view.cursor--
+				cmd := m.retarget()
+				return m, cmd
+			}
+		case "down", "j":
+			if m.view.cursor < len(m.statuses)-1 {
+				m.view.cursor++
+				cmd := m.retarget()
+				return m, cmd
 			}
 
-		case modeStatus:
-			switch msg.String() {
-			case "q":
-				return m, tea.Quit
+		// --- Center panel selection ------------------------------------------
+		case "m", "esc":
+			m.mode = modeMetrics
+			m.infoLoading = false
+		case "i", "enter":
+			if len(m.statuses) > 0 {
+				m.mode = modeInfo
+				m.infoLoading = true
+				return m, doLoadInfo(m.statuses[m.view.cursor])
+			}
+		case "l":
+			if len(m.statuses) > 0 {
+				m.logGen++
+				m.mode = modeLog
+				m.log = newLogView(m.statuses[m.view.cursor].Entry)
+				return m, tea.Batch(
+					doReadLog(m.log.entry, m.log.stream, 0, true),
+					logTickCmd(m.logGen),
+				)
+			}
 
-			case "up", "k":
-				if m.view.cursor > 0 {
-					m.view.cursor--
-				}
+		// --- Display toggles -------------------------------------------------
+		case "g":
+			if m.sel == selPointer {
+				m.sel = selSidebar
+			} else {
+				m.sel = selPointer
+			}
+		case "t":
+			m.themeIdx++
+			applyTheme(m.themeIdx)
+			m.statusBar = "Theme: " + themeName(m.themeIdx)
+		case "B":
+			m.graphMode = (m.graphMode + 1) % 3
+			m.statusBar = "Graph: " + m.graphMode.String()
 
-			case "down", "j":
-				if m.view.cursor < len(m.statuses)-1 {
-					m.view.cursor++
-				}
-
-			case "enter", "i":
-				if len(m.statuses) > 0 {
-					m.mode = modeInfo
-					m.infoData = nil
-					m.infoLoading = true
-					return m, doLoadInfo(m.statuses[m.view.cursor])
-				}
-
-			case "l":
-				if len(m.statuses) > 0 {
-					m.logGen++
-					m.mode = modeLog
-					m.log = newLogView(m.statuses[m.view.cursor].Entry)
-					return m, tea.Batch(
-						doReadLog(m.log.entry, m.log.stream, 0, true),
-						logTickCmd(m.logGen),
-					)
-				}
-
-			case "m":
-				if len(m.statuses) > 0 {
-					if m.metricsCursor >= len(m.statuses) {
-						m.metricsCursor = 0
-					}
-					m.mode = modeMetrics
-				}
-
-			case "r":
-				if m.err == nil {
-					m.statusBar = ""
-					return m, doRefreshStatus(m.entries)
-				}
-
-			case "s":
-				if !m.busy && len(m.statuses) > 0 {
-					sel := m.statuses[m.view.cursor]
-					if sel.State == "STOPPED" {
-						m.busy = true
-						m.statusBar = fmt.Sprintf("Starting %s…", sel.Entry.DisplayName)
-						return m, doStart(sel.Entry)
-					}
-				}
-
-			case "K":
-				if !m.busy && len(m.statuses) > 0 {
-					sel := m.statuses[m.view.cursor]
-					if sel.State == "RUNNING" {
-						m.busy = true
-						m.statusBar = fmt.Sprintf("Stopping %s…", sel.Entry.DisplayName)
-						return m, doStop(sel.Entry)
-					}
-				}
-
-			case "R":
-				if !m.busy && len(m.statuses) > 0 {
-					sel := m.statuses[m.view.cursor]
+		// --- Lifecycle (operate on the selected service) ---------------------
+		case "r":
+			if m.err == nil {
+				m.statusBar = ""
+				return m, doRefreshStatus(m.entries)
+			}
+		case "s":
+			if !m.busy && len(m.statuses) > 0 {
+				sel := m.statuses[m.view.cursor]
+				if sel.State == "STOPPED" {
 					m.busy = true
-					m.statusBar = fmt.Sprintf("Restarting %s…", sel.Entry.DisplayName)
-					return m, doRestart(sel.Entry)
+					m.statusBar = fmt.Sprintf("Starting %s…", sel.Entry.DisplayName)
+					return m, doStart(sel.Entry)
 				}
-
-			case "a":
-				if !m.busy && countInState(m.statuses, "STOPPED") > 0 {
+			}
+		case "K":
+			if !m.busy && len(m.statuses) > 0 {
+				sel := m.statuses[m.view.cursor]
+				if sel.State == "RUNNING" {
 					m.busy = true
-					m.statusBar = "Starting all stopped services…"
-					return m, doStartAll(m.statuses)
+					m.statusBar = fmt.Sprintf("Stopping %s…", sel.Entry.DisplayName)
+					return m, doStop(sel.Entry)
 				}
-
-			case "A":
-				if !m.busy && countInState(m.statuses, "RUNNING") > 0 {
-					m.busy = true
-					m.statusBar = "Stopping all running services…"
-					return m, doStopAll(m.statuses)
-				}
+			}
+		case "R":
+			if !m.busy && len(m.statuses) > 0 {
+				sel := m.statuses[m.view.cursor]
+				m.busy = true
+				m.statusBar = fmt.Sprintf("Restarting %s…", sel.Entry.DisplayName)
+				return m, doRestart(sel.Entry)
+			}
+		case "a":
+			if !m.busy && countInState(m.statuses, "STOPPED") > 0 {
+				m.busy = true
+				m.statusBar = "Starting all stopped services…"
+				return m, doStartAll(m.statuses)
+			}
+		case "A":
+			if !m.busy && countInState(m.statuses, "RUNNING") > 0 {
+				m.busy = true
+				m.statusBar = "Stopping all running services…"
+				return m, doStopAll(m.statuses)
 			}
 		}
 	}
 
 	return m, nil
+}
+
+// retarget re-points the center panel at the newly selected service when the
+// list selection changes. Metrics re-render automatically from the cursor, so
+// only Log and Info need an explicit reload.
+func (m *model) retarget() tea.Cmd {
+	if len(m.statuses) == 0 {
+		return nil
+	}
+	entry := m.statuses[m.view.cursor].Entry
+	switch m.mode {
+	case modeLog:
+		m.logGen++
+		m.log = newLogView(entry)
+		return tea.Batch(
+			doReadLog(m.log.entry, m.log.stream, 0, true),
+			logTickCmd(m.logGen),
+		)
+	case modeInfo:
+		m.infoLoading = true
+		return doLoadInfo(m.statuses[m.view.cursor])
+	}
+	return nil
+}
+
+func maxInt(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func minInt(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
 
 // countInState returns the number of statuses currently in the given state.
@@ -547,48 +516,125 @@ func countInState(statuses []ServiceStatus, state string) int {
 	return n
 }
 
-// topBar is the dated header shown at the top of every panel.
-func topBar() string {
-	return styleDim.Render("  griffin · "+time.Now().Format("Mon 2006-01-02  15:04:05")) + "\n"
+// topBar is the dated header line shown across the top of the frame.
+func (m model) topBar() string {
+	left := "  griffin · " + time.Now().Format("Mon 2006-01-02  15:04:05")
+	right := ""
+	if m.statusBar != "" {
+		right = m.statusBar
+	}
+	line := left
+	if right != "" {
+		line += "   ·   " + right
+	}
+	return styleDim.Render(line)
 }
 
-// View renders the current frame.
+// View composes the frame: a dated top bar, then the always-visible service
+// list on the left beside the active center panel, and a full-width legend at
+// the bottom.
 func (m model) View() string {
 	if m.err != nil {
-		return fitToFrame(topBar()+"\ngriffin: "+m.err.Error()+"\n\nPress q to quit.\n", m.width, m.height)
+		return fitToFrame(m.topBar()+"\n\ngriffin: "+m.err.Error()+"\n\nPress q to quit.\n", m.width, m.height)
 	}
 
-	var content string
+	W, H := m.width, m.height
+	if W <= 0 || H <= 0 {
+		// Before the first WindowSizeMsg, fall back to an unsized center panel.
+		return m.topBar() + "\n" + m.centerView(80, 20)
+	}
+
+	legend := legendLines(m.mode)
+	midH := H - 1 - len(legend) // 1 for the top bar
+	if midH < 1 {
+		midH = 1
+	}
+
+	leftW := 38
+	if leftW > W-12 {
+		leftW = W / 3
+	}
+	if leftW < 12 {
+		leftW = 12
+	}
+	centerW := W - leftW - 1 // 1 column separator
+	if centerW < 10 {
+		centerW = 10
+	}
+
+	leftBlock := lipgloss.NewStyle().Width(leftW).MaxWidth(leftW).Height(midH).MaxHeight(midH).
+		Render(renderServiceList(m.statuses, m.metrics, m.view.cursor, m.sel, leftW))
+	sepBlock := lipgloss.NewStyle().Width(1).Height(midH).MaxHeight(midH).
+		Foreground(lipgloss.Color("8")).Render(strings.Repeat("│\n", midH))
+	centerBlock := lipgloss.NewStyle().Width(centerW).Height(midH).MaxHeight(midH).MaxWidth(centerW).
+		Render(m.centerView(centerW, midH))
+
+	mid := lipgloss.JoinHorizontal(lipgloss.Top, leftBlock, sepBlock, centerBlock)
+	legendBlock := styleDim.Render(strings.Join(legend, "\n"))
+
+	frame := lipgloss.JoinVertical(lipgloss.Left, m.topBar(), mid, legendBlock)
+	return fitToFrame(frame, W, H)
+}
+
+// centerView renders the active center panel sized to the center area.
+func (m model) centerView(w, h int) string {
 	switch m.mode {
 	case modeLog:
-		content = m.log.View(m.width, m.height)
-
-	case modeMetrics:
-		nextRefresh := 5*time.Second - time.Since(m.lastTick)
-		content = renderMetricsPanel(m.cfg.AppRoot, m.statuses, m.metrics,
-			m.metricHistory, m.metricsCursor, nextRefresh, m.width, m.sel, m.graphMode)
-
+		return m.log.View(w, h)
 	case modeInfo:
-		if len(m.statuses) > 0 {
-			inner := "\n  Collecting details…\n"
-			if m.infoData != nil {
-				inner = renderInfoPanel(*m.infoData, m.width)
-			}
-			content = infoPanelBorder.Render(inner)
-			break
+		if len(m.statuses) == 0 {
+			return "\n  No services."
 		}
-		m.mode = modeStatus
-		fallthrough
-
-	default:
-		view := m.view.View(m.width, m.sel)
-		if m.statusBar != "" {
-			view += "\n  " + m.statusBar + "\n"
+		name := m.statuses[m.view.cursor].Entry.Name
+		if cached, ok := m.infoCache[name]; ok {
+			return renderInfoPanel(cached, m.cfg.AppRoot, w, m.infoLoading)
 		}
-		content = view
+		return "\n  Collecting details…"
+	default: // modeMetrics
+		return m.centerMetrics(w)
 	}
+}
 
-	return fitToFrame(topBar()+content, m.width, m.height)
+// centerMetrics renders a totals line plus the focused braille graphs for the
+// selected service.
+func (m model) centerMetrics(w int) string {
+	var b strings.Builder
+
+	var totalCPU float64
+	var totalRSS, totalDir uint64
+	for _, s := range m.statuses {
+		mm := m.metrics[s.Entry.Name]
+		if s.State == "RUNNING" {
+			if mm.CPUPercent > 0 {
+				totalCPU += mm.CPUPercent
+			}
+			totalRSS += mm.RSS
+		}
+		totalDir += mm.DirBytes
+	}
+	secs := int((5*time.Second - time.Since(m.lastTick)).Seconds())
+	if secs < 0 {
+		secs = 0
+	}
+	b.WriteString(styleDim.Render(fmt.Sprintf("  Σ  CPU %.1f%%   Mem %s   Dir %s   ·   refresh %ds",
+		totalCPU, formatBytes(totalRSS), formatBytes(totalDir), secs)))
+	b.WriteString("\n")
+
+	if len(m.statuses) > 0 {
+		sel := m.statuses[m.view.cursor]
+		focusedGraphs(&b, sel, m.metricHistory[sel.Entry.Name], w, m.graphMode)
+	}
+	return b.String()
+}
+
+// legendLines returns the bottom legend for the given center mode.
+func legendLines(mode viewMode) []string {
+	nav := "  ↑/↓ select   s start   K stop   R restart   a/A bulk all   r refresh"
+	views := "  m metrics   i info   l logs   g gutter   t theme   B graph   q quit"
+	if mode == modeLog {
+		return []string{nav, views, "  PgUp/PgDn scroll   f follow   tab switch stream"}
+	}
+	return []string{nav, views}
 }
 
 // fitToFrame forces content into a block of exactly width×height cells. Lip
